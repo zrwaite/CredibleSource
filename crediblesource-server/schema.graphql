@@ -23,10 +23,34 @@ type UsersResult {
 	users: [User]
 }
 
+type Post {
+	id: ID!
+	headline: String!
+	description: String!
+	content: String!
+	created_at: String!
+}
+
+type PostResult {
+	success: Boolean!
+	errors: [String]
+	post: Post
+}
+
+type PostsResult {
+	success: Boolean!
+	errors: [String]
+	posts: [Post]
+}
+
 type Query {
-	hello: String!
+	health: String!
+
 	listUsers: UsersResult!
 	getUser(id: ID!): UserResult!
+
+	listPosts: PostsResult!
+	getPost(id: ID!): PostResult!
 }
 
 type Mutation {
@@ -41,4 +65,17 @@ type Mutation {
 		display_name: String
 	): UserResult!
 	deleteUser(id: ID!): UserResult!
+
+	createPost(
+		headline:String!
+		description:String!
+		content:String!
+	): PostResult!
+	updatePost(
+		id:ID!
+		headline:String!
+		description:String!
+		content:String!
+	): PostResult!
+	deletePost(id: ID!): PostResult!
 }

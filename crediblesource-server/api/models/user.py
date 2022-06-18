@@ -2,10 +2,10 @@ from app import db
 
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String)
-	hash = db.Column(db.String)
-	display_name = db.Column(db.String)
-	created_at = db.Column(db.Date)
+	username = db.Column(db.String, nullable=False)
+	hash = db.Column(db.String, nullable=False)
+	display_name = db.Column(db.String, nullable=False)
+	created_at = db.Column(db.Date, nullable=False)
 	def to_dict(self):
 		return {
 			"id": self.id,

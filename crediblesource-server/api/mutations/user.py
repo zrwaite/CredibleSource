@@ -1,7 +1,7 @@
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
 from api import db
-from api.models import User
+from api.models.user import User
 
 @convert_kwargs_to_snake_case
 def createUser_resolver(obj, info, username, password, display_name):

@@ -1,6 +1,6 @@
 from ariadne import convert_kwargs_to_snake_case
 from traceback import print_exc
-from .models import User
+from api.models.user import User
 def listUsers_resolver(obj, info):
 	try: 
 		users = [user.to_dict() for user in User.query.all()]
@@ -28,6 +28,6 @@ def getUser_resolver(obj, info, id):
 	except AttributeError as error:
 		payload = {
 			"success": False,
-			"errors": ["User not found", str(error)]
+			"errors": ["user not found", str(error)]
 		}
 	return payload
