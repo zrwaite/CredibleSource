@@ -1,5 +1,6 @@
 schema {
 	query: Query
+	mutation: Mutation
 }
 
 type User {
@@ -28,3 +29,16 @@ type Query {
 	getUser(id: ID!): UserResult!
 }
 
+type Mutation {
+	createUser(
+		username: String!
+		password: String!
+		display_name: String
+	): UserResult!
+	updateUser(
+		id: ID!
+		username: String
+		display_name: String
+	): UserResult!
+	deleteUser(id: ID!): UserResult!
+}

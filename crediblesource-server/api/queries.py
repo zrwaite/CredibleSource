@@ -25,9 +25,9 @@ def getUser_resolver(obj, info, id):
 			"success": True,
 			"user": user.to_dict()
 		}
-	except AttributeError:
+	except AttributeError as error:
 		payload = {
 			"success": False,
-			"errors": ["User not found"]
+			"errors": ["User not found", str(error)]
 		}
 	return payload
