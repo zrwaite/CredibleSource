@@ -10,12 +10,18 @@ import { Alert } from 'react-native'
 import { LoadingScreen } from './app/screens/LoadingScreen'
 import { PostsView } from './app/screens/PostsView'
 import { PostView } from './app/screens/PostView'
+import { CreatePostView } from './app/screens/CreatePostView'
 
 const Stack = createNativeStackNavigator() as any
 
 const UserContext = createContext<{ user: User | null; setUser: Function }>({
 	user: null,
 	setUser: () => {},
+})
+
+const PostsContext = createContext<{ posts: Post[]; setPosts: Function }>({
+	posts: [],
+	setPosts: () => {},
 })
 
 export default function App() {
@@ -46,34 +52,40 @@ export default function App() {
 	}
 	const [user, setUser] = useState<User | null>(null)
 	const userValue = { user, setUser }
+
+	const [posts, setPosts] = useState<Post[]>([])
+	const postValue = { posts, setPosts }
 	if (usernameState === 'LOADING') {
 		setTimeout(tryGetUser, 1000)
 	}
 	return (
 		<UserContext.Provider value={userValue}>
-			{usernameState === 'LOADING' ? (
-				<LoadingScreen />
-			) : (
-				<NavigationContainer>
-					<Stack.Navigator>
-						{usernameState === 'FOUND' ? (
-							<>
-								<Stack.Screen name="Home" component={HomeView} />
-								<Stack.Screen name="Login" component={LoginView} />
-							</>
-						) : (
-							<>
-								<Stack.Screen name="Login" component={LoginView} />
-								<Stack.Screen name="Home" component={HomeView} />
-							</>
-						)}
-						<Stack.Screen name="Posts" component={PostsView} />
-						<Stack.Screen name="Post" component={PostView} />
-					</Stack.Navigator>
-				</NavigationContainer>
-			)}
+			<PostsContext.Provider value={postValue}>
+				{usernameState === 'LOADING' ? (
+					<LoadingScreen />
+				) : (
+					<NavigationContainer>
+						<Stack.Navigator>
+							{usernameState === 'FOUND' ? (
+								<>
+									<Stack.Screen name="Home" component={HomeView} />
+									<Stack.Screen name="Login" component={LoginView} />
+								</>
+							) : (
+								<>
+									<Stack.Screen name="Login" component={LoginView} />
+									<Stack.Screen name="Home" component={HomeView} />
+								</>
+							)}
+							<Stack.Screen name="Posts" component={PostsView} />
+							<Stack.Screen name="Post" component={PostView} />
+							<Stack.Screen name="Create" component={CreatePostView} />
+						</Stack.Navigator>
+					</NavigationContainer>
+				)}
+			</PostsContext.Provider>
 		</UserContext.Provider>
 	)
 }
 
-export { UserContext }
+export { UserContext, PostsContext }

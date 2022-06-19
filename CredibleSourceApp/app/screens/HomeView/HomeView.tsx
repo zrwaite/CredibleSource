@@ -17,7 +17,6 @@ const logout = async (navigation: any, setUser: Function) => {
 export const HomeView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
-	console.log(user)
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
@@ -41,6 +40,17 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 					}}
 				/>
 				<Text style={styles.clickSectionText}>See Posts</Text>
+			</TouchableOpacity>
+			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create')}>
+				<Image
+					source={postsImage}
+					style={{
+						height: 45,
+						width: 40,
+						marginRight: 10,
+					}}
+				/>
+				<Text style={styles.clickSectionText}>Create Post</Text>
 			</TouchableOpacity>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>

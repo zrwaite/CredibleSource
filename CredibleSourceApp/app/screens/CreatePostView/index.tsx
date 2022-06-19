@@ -1,0 +1,1 @@
+export { CreatePostView } from './CreatePostView'

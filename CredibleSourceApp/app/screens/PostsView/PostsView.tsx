@@ -1,14 +1,16 @@
-import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 const logoImage = require('../../assets/VCS.png')
 const postsImage = require('../../assets/Posts.png')
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { client } from '../../../client'
 import { LIST_POSTS } from './queries'
 import { COLORS } from '../../settings'
+import { PostsContext } from '../../../App'
 
 export const PostsView = ({ navigation }: { navigation: any }) => {
-	const [posts, setPosts] = useState<Post[]>([])
+	const { posts, setPosts } = useContext(PostsContext)
+
 	const [postsState, setPostsState] = useState<'LOADING' | 'LOADED'>('LOADING')
 
 	const getPosts = async () => {
@@ -16,11 +18,7 @@ export const PostsView = ({ navigation }: { navigation: any }) => {
 		if (!response.error) {
 			const data = response.data
 			if (data.listPosts.success) {
-				try {
-					setPosts(data.listPosts.posts)
-				} catch (e) {
-					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
-				}
+				setPosts([...data.listPosts.posts].reverse())
 			} else {
 				Alert.alert('Error', JSON.stringify(data.listPosts.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 			}
@@ -31,7 +29,7 @@ export const PostsView = ({ navigation }: { navigation: any }) => {
 		getPosts()
 	}
 	return (
-		<SafeAreaProvider style={styles.container}>
+		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
 			{postsState === 'LOADING' ? (
 				<ActivityIndicator size="large" />
 			) : (
@@ -44,7 +42,7 @@ export const PostsView = ({ navigation }: { navigation: any }) => {
 					)
 				})
 			)}
-		</SafeAreaProvider>
+		</ScrollView>
 	)
 }
 
@@ -64,9 +62,9 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.vcsYellow,
-		alignItems: 'center',
-		justifyContent: 'flex-start',
+		width: '100%',
 		padding: 20,
+		overflow: 'scroll',
 	},
 	postSection: {
 		backgroundColor: 'white',
@@ -80,9 +78,11 @@ const styles = StyleSheet.create({
 	postSectionHeader: {
 		color: 'black',
 		fontSize: 20,
+		textAlign: 'center',
 	},
 	postSectionDescription: {
 		color: 'grey',
 		fontSize: 15,
+		textAlign: 'center',
 	},
 })

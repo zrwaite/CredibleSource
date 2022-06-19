@@ -35,7 +35,7 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 			if (data.login.success) {
 				try {
 					await AsyncStorage.setItem('username', username)
-					Alert.alert('Logged In', `You are logged in as "${username}", ${data.login.user.display_name}`, [{ text: 'OK' }])
+					Alert.alert('Logged In', `You are logged in as "${username}"`, [{ text: 'OK' }])
 					setUser(data.login.user)
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])

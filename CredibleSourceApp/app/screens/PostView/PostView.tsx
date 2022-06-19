@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
 	content: {
 		color: 'white',
 		fontSize: 20,
+		padding: 5,
 	},
 	footer: {
 		color: 'black',
