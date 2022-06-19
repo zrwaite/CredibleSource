@@ -5,6 +5,8 @@ export const SIGNUP = gql`
 		createUser(username: $username, password: $password) {
 			user {
 				id
+				username
+				post_ids
 			}
 			success
 			errors

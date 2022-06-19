@@ -5,7 +5,8 @@ export const LOGIN = gql`
 		login(username: $username, password: $password) {
 			user {
 				id
-				display_name
+				username
+				post_ids
 			}
 			success
 			errors

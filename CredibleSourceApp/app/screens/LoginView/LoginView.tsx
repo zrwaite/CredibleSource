@@ -1,15 +1,15 @@
 import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
 const logoImage = require('../../assets/VCS.png')
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import Query from '@apollo/client'
 
 import { StackActions } from '@react-navigation/native'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { client } from '../../../client'
 import { LOGIN } from './queries'
 import { SIGNUP } from './mutations'
+import { UserContext } from '../../../App'
 
 const loginRedirect = async (navigation: any) => {
 	const username = await AsyncStorage.getItem('username')
@@ -23,6 +23,8 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const buttonsEnabled = username.length !== 0 && password.length !== 0
+	const { setUser } = useContext(UserContext)
+
 	const tryLogin = async () => {
 		const response = await client.query({
 			query: LOGIN,
@@ -34,7 +36,7 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 				try {
 					await AsyncStorage.setItem('username', username)
 					Alert.alert('Logged In', `You are logged in as "${username}", ${data.login.user.display_name}`, [{ text: 'OK' }])
-					navigation.dispatch(StackActions.replace('Home'))
+					setUser(data.login.user)
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}
@@ -55,6 +57,7 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 				try {
 					await AsyncStorage.setItem('username', username)
 					Alert.alert('User Created!', `You are logged in as "${username}"`, [{ text: 'OK' }])
+					setUser(data.createUser.user)
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}
