@@ -6,21 +6,28 @@ from modules.hash import hash_password
 
 
 @convert_kwargs_to_snake_case
-def createUser_resolver(obj, info, username, password, display_name):
+def createUser_resolver(obj, info, username, password):
     try:
-        today = date.today()
-        user = User(
-            username=username,
-            hash=hash_password(password),
-            display_name=display_name,
-            created_at=today
-        )
-        db.session.add(user)
-        db.session.commit()
-        payload = {
-            "success": True,
-            "user": user.to_dict()
-        }
+        prev_user = User.query.filter(User.username == username).scalar()
+        if prev_user:
+            payload = {
+                "success": False,
+                "errors": ["username in use"]
+            }
+        else:
+            today = date.today()
+            user = User(
+                username=username,
+                hash=hash_password(password),
+                display_name='',
+                created_at=today
+            )
+            db.session.add(user)
+            db.session.commit()
+            payload = {
+                "success": True,
+                "user": user.to_dict()
+            }
     except ValueError:
         payload = {
             "success": False,

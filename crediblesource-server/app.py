@@ -30,8 +30,8 @@ def getUser(obj, info, username):
 
 
 @mutation.field('createUser')
-def createUser(obj, info, username, password, display_name):
-    return createUser_resolver(obj, info, username, password, display_name)
+def createUser(obj, info, username, password):
+    return createUser_resolver(obj, info, username, password)
 
 
 @mutation.field('deleteUser')

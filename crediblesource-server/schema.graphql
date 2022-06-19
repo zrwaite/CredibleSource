@@ -56,7 +56,7 @@ type Query {
 }
 
 type Mutation {
-	createUser(username: String!, password: String!, display_name: String): UserResult!
+	createUser(username: String!, password: String!): UserResult!
 	updateUser(id: ID!, username: String, display_name: String): UserResult!
 	deleteUser(id: ID!): UserResult!
 
