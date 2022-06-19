@@ -61,10 +61,8 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}
-			} else {
-				Alert.alert('Error', JSON.stringify(data.createUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
-			}
-		}
+			} else Alert.alert('Error', JSON.stringify(data.createUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 	return (
 		<View style={styles.container}>
@@ -81,8 +79,6 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 			<TextInput style={styles.textInput} placeholder="Password" placeholderTextColor={COLORS.vcsGreen} onChangeText={(password) => setPassword(password)} />
 			<ZacButton style={{ marginTop: 30 }} onPress={tryLogin} color={COLORS.vcsBlue} text={'Login'} enabled={buttonsEnabled} />
 			<ZacButton onPress={trySignUp} color={COLORS.vcsYellow} text={'Sign Up'} enabled={buttonsEnabled} />
-
-			{/* <Button title="Go Home" onPress={() => navigation.dispatch(StackActions.replace('Home'))} /> */}
 		</View>
 	)
 }

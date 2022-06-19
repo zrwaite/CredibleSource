@@ -1,8 +1,7 @@
-import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
+import { StyleSheet, Alert, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 const logoImage = require('../../assets/VCS.png')
 const postsImage = require('../../assets/Posts.png')
 import { useContext, useState } from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { client } from '../../../client'
 import { LIST_POSTS } from './queries'
 import { COLORS } from '../../settings'
@@ -19,15 +18,11 @@ export const PostsView = ({ navigation }: { navigation: any }) => {
 			const data = response.data
 			if (data.listPosts.success) {
 				setPosts([...data.listPosts.posts].reverse())
-			} else {
-				Alert.alert('Error', JSON.stringify(data.listPosts.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
-			}
-		}
+			} else Alert.alert('Error', JSON.stringify(data.listPosts.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		setPostsState('LOADED')
 	}
-	if (postsState === 'LOADING') {
-		getPosts()
-	}
+	if (postsState === 'LOADING') getPosts()
 	return (
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
 			{postsState === 'LOADING' ? (

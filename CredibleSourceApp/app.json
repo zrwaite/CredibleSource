@@ -1,31 +1,35 @@
 {
-	"expo": {
-		"name": "CredibleSource",
-		"slug": "CredibleSource",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./app/assets/icon.png",
-		"userInterfaceStyle": "light",
-		"splash": {
-			"image": "./app/assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./app/assets/adaptive-icon.png",
-				"backgroundColor": "#FFFFFF"
-			}
-		},
-		"web": {
-			"favicon": "./app/assets/favicon.png"
-		}
-	}
+  "expo": {
+    "name": "A Very Credible Source",
+    "slug": "CredibleSource",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./app/assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./app/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./app/assets/favicon.png"
+    },
+    "description": "My dad talked about having an app where he can write whatever he wants, and then later say he got that info from a very credible source, so I made this app for father's day.",
+    "githubUrl": "https://github.com/zrwaite/CredibleSource"
+  }
 }

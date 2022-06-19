@@ -1,5 +1,4 @@
-import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { StyleSheet, View, Text } from 'react-native'
 import { COLORS } from '../../settings'
 
 export const PostView = ({ route }: { route: { params: { post: Post } } }) => {

@@ -1,6 +1,5 @@
-import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Alert, Image, Text, TextInput, ScrollView } from 'react-native'
 const logoImage = require('../../assets/VCS.png')
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { StackActions } from '@react-navigation/native'
 import { useContext, useState } from 'react'
@@ -8,7 +7,7 @@ import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { client } from '../../../client'
 import { CREATE_POST } from './mutations'
-import { PostsContext, UserContext } from '../../../App'
+import { PostsContext } from '../../../App'
 
 export const CreatePostView = ({ navigation }: { navigation: any }) => {
 	const { posts, setPosts } = useContext(PostsContext)
@@ -25,17 +24,11 @@ export const CreatePostView = ({ navigation }: { navigation: any }) => {
 		if (!response.errors) {
 			const data = response.data
 			if (data.createPost.success) {
-				try {
-					Alert.alert('Post Created!', `View it here`, [{ text: 'OK' }])
-					setPosts([data.createPost.post, ...posts])
-					navigation.dispatch(StackActions.replace('Post', { post: data.createPost.post }))
-				} catch (e) {
-					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
-				}
-			} else {
-				Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK' }])
-			}
-		}
+				Alert.alert('Post Created!', `View it here`, [{ text: 'OK' }])
+				setPosts([data.createPost.post, ...posts])
+				navigation.dispatch(StackActions.replace('Post', { post: data.createPost.post }))
+			} else Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK' }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK' }])
 	}
 
 	return (
@@ -61,8 +54,6 @@ export const CreatePostView = ({ navigation }: { navigation: any }) => {
 			/>
 			<TextInput blurOnSubmit={true} multiline={true} style={styles.textInput} placeholder="Content" placeholderTextColor={COLORS.vcsYellow} onChangeText={(content) => setContent(content)} />
 			<ZacButton style={{ marginTop: 30 }} onPress={tryCreatePost} color={COLORS.vcsBlue} text={'Create Post'} enabled={submitEnabled} />
-
-			{/* <Button title="Go Home" onPress={() => navigation.dispatch(StackActions.replace('Home'))} /> */}
 		</ScrollView>
 	)
 }

@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 
 export const ZacButton = (props: { onPress: () => void; text: string; color?: string; style?: ViewStyle; enabled?: boolean }) => {
 	let buttonEnabled = props.enabled

@@ -1,7 +1,8 @@
-import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 const logoImage = require('../../assets/VCS.png')
+const addImage = require('../../assets/add.png')
 const postsImage = require('../../assets/Posts.png')
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../App'
@@ -9,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 
 const logout = async (navigation: any, setUser: Function) => {
-	const username = await AsyncStorage.setItem('username', '')
+	await AsyncStorage.setItem('username', '')
 	navigation.dispatch(StackActions.replace('Login'))
 	setUser(null)
 }
@@ -36,18 +37,18 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 					style={{
 						height: 45,
 						width: 40,
-						marginRight: 10,
+						marginRight: 20,
 					}}
 				/>
 				<Text style={styles.clickSectionText}>See Posts</Text>
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create')}>
 				<Image
-					source={postsImage}
+					source={addImage}
 					style={{
-						height: 45,
+						height: 40,
 						width: 40,
-						marginRight: 10,
+						marginRight: 20,
 					}}
 				/>
 				<Text style={styles.clickSectionText}>Create Post</Text>

@@ -39,15 +39,9 @@ export default function App() {
 		if (!response.error) {
 			const data = response.data
 			if (data.getUser.success) {
-				try {
-					setUser(data.getUser.user)
-				} catch (e) {
-					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
-				}
-			} else {
-				Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
-			}
-		}
+				setUser(data.getUser.user)
+			} else Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		setUsernameState('FOUND')
 	}
 	const [user, setUser] = useState<User | null>(null)
