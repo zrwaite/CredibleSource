@@ -1,4 +1,7 @@
 import { StyleSheet, SafeAreaView, Button, Alert, View, Dimensions, Image, Text, ImageBackground } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ZacButton } from '../components/ZacButton'
+import { StackActions } from '@react-navigation/native'
 const iconImage = require('../assets/icon.png')
 export const HomeView = ({ navigation }: { navigation: any }) => {
 	return (
@@ -20,6 +23,13 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 					/>
 					<Text style={{ textAlign: 'center' }}>Home Page</Text>
 				</View>
+				<ZacButton
+					text="Logout"
+					onPress={async () => {
+						await AsyncStorage.setItem('username', '')
+						navigation.dispatch(StackActions.replace('Login'))
+					}}
+				/>
 			</SafeAreaView>
 		</ImageBackground>
 	)

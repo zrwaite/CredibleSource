@@ -1,6 +1,8 @@
-import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native'
+import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 
-export const ZacButton = (props: { onPress: () => void; text: string; color?: string; style?: ViewStyle }) => {
+export const ZacButton = (props: { onPress: () => void; text: string; color?: string; style?: ViewStyle; enabled?: boolean }) => {
+	let buttonEnabled = props.enabled
+	if (buttonEnabled === undefined) buttonEnabled = true
 	const styles = StyleSheet.create({
 		container: {
 			display: 'flex',
@@ -9,7 +11,7 @@ export const ZacButton = (props: { onPress: () => void; text: string; color?: st
 			width: '50%',
 			margin: 10,
 			borderRadius: 20,
-			backgroundColor: props.color ?? 'black',
+			backgroundColor: props.color ?? 'grey',
 			...props.style,
 		},
 		text: {
@@ -20,9 +22,13 @@ export const ZacButton = (props: { onPress: () => void; text: string; color?: st
 			width: '100%',
 		},
 	})
-	return (
+	return buttonEnabled ? (
 		<TouchableOpacity style={styles.container} onPress={props.onPress}>
 			<Text style={styles.text}>{props.text}</Text>
 		</TouchableOpacity>
+	) : (
+		<View style={{ ...styles.container, opacity: 0.5 }}>
+			<Text style={styles.text}>{props.text}</Text>
+		</View>
 	)
 }
