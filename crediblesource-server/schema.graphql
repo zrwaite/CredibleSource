@@ -47,35 +47,20 @@ type Query {
 	health: String!
 
 	listUsers: UsersResult!
-	getUser(id: ID!): UserResult!
+	getUser(username: String!): UserResult!
 
 	listPosts: PostsResult!
 	getPost(id: ID!): PostResult!
+
+	login(username: String!, password: String!): UserResult!
 }
 
 type Mutation {
-	createUser(
-		username: String!
-		password: String!
-		display_name: String
-	): UserResult!
-	updateUser(
-		id: ID!
-		username: String
-		display_name: String
-	): UserResult!
+	createUser(username: String!, password: String!, display_name: String): UserResult!
+	updateUser(id: ID!, username: String, display_name: String): UserResult!
 	deleteUser(id: ID!): UserResult!
 
-	createPost(
-		headline:String!
-		description:String!
-		content:String!
-	): PostResult!
-	updatePost(
-		id:ID!
-		headline:String!
-		description:String!
-		content:String!
-	): PostResult!
+	createPost(headline: String!, description: String!, content: String!): PostResult!
+	updatePost(id: ID!, headline: String!, description: String!, content: String!): PostResult!
 	deletePost(id: ID!): PostResult!
 }

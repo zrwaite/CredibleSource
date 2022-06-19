@@ -9,7 +9,7 @@ from api.mutations.user import createUser_resolver, updateUser_resolver, deleteU
 
 from api.queries.post import listPosts_resolver, getPost_resolver
 from api.mutations.post import createPost_resolver, updatePost_resolver, deletePost_resolver
-
+from api.queries.login import login_resolver
 query = QueryType()
 mutation = MutationType()
 
@@ -25,8 +25,8 @@ def listUsers(obj, info):
 
 
 @query.field('getUser')
-def getUser(obj, info, id):
-    return getUser_resolver(obj, info, id)
+def getUser(obj, info, username):
+    return getUser_resolver(obj, info, username)
 
 
 @mutation.field('createUser')
@@ -67,6 +67,11 @@ def deletePost(obj, info, id):
 @mutation.field('updatePost')
 def updatePost(obj, info, headline, description, content):
     return updatePost_resolver(obj, info, id, headline, description, content)
+
+
+@query.field('login')
+def login(obj, info, username, password):
+    return login_resolver(obj, info, username, password)
 
 
 type_defs = load_schema_from_path("schema.graphql")
