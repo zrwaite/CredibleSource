@@ -8,6 +8,7 @@ type User {
 	username: String!
 	hash: String!
 	display_name: String
+	post_ids: [ID]!
 	created_at: String!
 }
 

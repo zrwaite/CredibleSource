@@ -20,7 +20,8 @@ def createUser_resolver(obj, info, username, password):
                 username=username,
                 hash=hash_password(password),
                 display_name='',
-                created_at=today
+                created_at=today,
+                post_ids=[]
             )
             db.session.add(user)
             db.session.commit()

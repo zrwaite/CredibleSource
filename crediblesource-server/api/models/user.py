@@ -8,6 +8,7 @@ class User(db.Model):
     hash = db.Column(db.String, nullable=False)
     display_name = db.Column(db.String, nullable=False)
     created_at = db.Column(db.Date, nullable=False)
+    post_ids = db.Column(db.ARRAY(db.Integer))
 
     def to_dict(self):
         return {
@@ -15,5 +16,6 @@ class User(db.Model):
             "username": self.username,
             "hash": self.hash,
             "display_name": self.display_name,
+            "post_ids": self.post_ids,
             "created_at": str(self.created_at.strftime('%d-%m-%Y'))
         }
