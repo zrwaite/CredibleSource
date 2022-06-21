@@ -1,0 +1,7 @@
+services:
+    server:
+        env_file: './server/.env'
+        build: './'
+        image: 'zrwaite/crediblesource:1.0.7'
+        ports:
+            - '8005:8005'
