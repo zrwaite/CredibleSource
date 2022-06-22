@@ -11,6 +11,7 @@ import { LoadingScreen } from './app/screens/LoadingScreen'
 import { PostsView } from './app/screens/PostsView'
 import { PostView } from './app/screens/PostView'
 import { CreatePostView } from './app/screens/CreatePostView'
+import { SettingsView } from './app/screens/SettingsView'
 
 const Stack = createNativeStackNavigator() as any
 
@@ -73,6 +74,7 @@ export default function App() {
 							)}
 							<Stack.Screen name="Posts" component={PostsView} />
 							<Stack.Screen name="Post" component={PostView} />
+							<Stack.Screen name="Settings" component={SettingsView} />
 							<Stack.Screen name="Create" component={CreatePostView} />
 						</Stack.Navigator>
 					</NavigationContainer>

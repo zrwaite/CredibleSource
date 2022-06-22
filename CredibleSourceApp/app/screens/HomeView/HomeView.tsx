@@ -53,6 +53,17 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				/>
 				<Text style={styles.clickSectionText}>Create Post</Text>
 			</TouchableOpacity>
+			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+				<Image
+					source={addImage}
+					style={{
+						height: 40,
+						width: 40,
+						marginRight: 20,
+					}}
+				/>
+				<Text style={styles.clickSectionText}>Settings</Text>
+			</TouchableOpacity>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>
 	)
