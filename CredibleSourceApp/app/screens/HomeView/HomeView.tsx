@@ -5,7 +5,7 @@ const postsImage = require('../../assets/Posts.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
-import { UserContext } from '../../../App'
+import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 

@@ -9,7 +9,7 @@ import { ZacButton } from '../../components/ZacButton'
 import { client } from '../../../client'
 import { LOGIN } from './queries'
 import { SIGNUP } from './mutations'
-import { UserContext } from '../../../App'
+import { UserContext } from '../../../contexts'
 
 const loginRedirect = async (navigation: any) => {
 	const username = await AsyncStorage.getItem('username')

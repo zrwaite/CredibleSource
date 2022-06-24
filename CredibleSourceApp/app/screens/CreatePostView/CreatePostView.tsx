@@ -7,7 +7,7 @@ import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { client } from '../../../client'
 import { CREATE_POST } from './mutations'
-import { PostsContext } from '../../../App'
+import { PostsContext } from '../../../contexts'
 
 export const CreatePostView = ({ navigation }: { navigation: any }) => {
 	const { posts, setPosts } = useContext(PostsContext)

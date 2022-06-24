@@ -5,7 +5,7 @@ import { useContext, useState } from 'react'
 import { client } from '../../../client'
 import { LIST_POSTS } from './queries'
 import { COLORS } from '../../settings'
-import { PostsContext } from '../../../App'
+import { PostsContext } from '../../../contexts'
 
 export const PostsView = ({ navigation }: { navigation: any }) => {
 	const { posts, setPosts } = useContext(PostsContext)

@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createContext, useState } from 'react'
+import { useState } from 'react'
 import { HomeView } from './app/screens/HomeView'
 import { LoginView } from './app/screens/LoginView/LoginView'
 import { client } from './client'
@@ -12,18 +12,9 @@ import { PostsView } from './app/screens/PostsView'
 import { PostView } from './app/screens/PostView'
 import { CreatePostView } from './app/screens/CreatePostView'
 import { SettingsView } from './app/screens/SettingsView'
+import { UserContext, PostsContext } from './contexts'
 
 const Stack = createNativeStackNavigator() as any
-
-const UserContext = createContext<{ user: User | null; setUser: Function }>({
-	user: null,
-	setUser: () => {},
-})
-
-const PostsContext = createContext<{ posts: Post[]; setPosts: Function }>({
-	posts: [],
-	setPosts: () => {},
-})
 
 export default function App() {
 	const [usernameState, setUsernameState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND'>('LOADING')
@@ -83,5 +74,3 @@ export default function App() {
 		</UserContext.Provider>
 	)
 }
-
-export { UserContext, PostsContext }
